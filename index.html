@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IAWARD · Episode 01</title>
+<style>
+  :root {
+    --bg: #050507; --surface: #101116; --line: #2a2d38; --text: #ffffff; --text2: #d6d9e0;
+    --muted: #8b90a0; --red: #e52529; --cyan: #2ee6f2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #000; color: var(--text);
+    font-family: SeriesSans, Inter, 'Segoe UI', Roboto, Arial, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 16px; }
+  #stage { position: relative; height: calc(100vh - 150px); aspect-ratio: 9 / 16; max-width: calc(100vw - 32px);
+    background: var(--bg); box-shadow: 0 0 0 1px #222, 0 30px 80px rgba(0,0,0,.6); }
+  #stage canvas { width: 100%; height: 100%; display: block; }
+  body.phone #stage { height: 640px; width: 360px; }
+  #controls { width: min(720px, 100%); display: grid; gap: 10px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  button { font: 600 14px/1 inherit; font-family: inherit; color: var(--text); background: var(--surface);
+    border: 1px solid #343846; border-radius: 999px; padding: 9px 14px; cursor: pointer; }
+  button:hover { border-color: var(--text2); }
+  button.primary { background: var(--red); border-color: var(--red); min-width: 92px; }
+  button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); }
+  input[type=range] { flex: 1; accent-color: var(--red); min-width: 160px; }
+  #time { font: 600 14px/1 ui-monospace, monospace; color: var(--text2); min-width: 120px; text-align: right; }
+  #msg { font-size: 13px; color: var(--muted); min-height: 1.2em; }
+  .chapters button { font-size: 13px; padding: 7px 11px; }
+  /* Recording mode: composition only, no UI */
+  body.record { padding: 0; background: var(--bg); }
+  body.record #controls { display: none; }
+  body.record #stage { height: 100vh; box-shadow: none; }
+  body.record.native #stage { height: 1920px; width: 1080px; max-width: none; }
+  body.record.native { display: block; overflow: hidden; }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="video" aria-label="IAWARD episode 01 animation"></canvas></div>
+
+<div id="controls">
+  <div class="row">
+    <button id="play" class="primary">Play</button>
+    <button id="restart">Restart</button>
+    <input id="scrub" type="range" min="0" max="45" step="0.0333" value="0" aria-label="Timeline">
+    <span id="time">00:00.00 / 00:45</span>
+  </div>
+  <div class="row chapters" id="chapters"></div>
+  <div class="row">
+    <button id="phone" aria-pressed="false">Phone preview 360×640</button>
+    <button id="safe" aria-pressed="false">Safe areas</button>
+    <button id="record">Recording mode (R)</button>
+    <button id="png">Save frame PNG</button>
+    <button id="webm">Record WebM (real time)</button>
+  </div>
+  <div id="msg">Space: play/pause · ←/→: step one frame · Home: restart · R: recording mode · Esc: exit</div>
+</div>
+
+<script src="src/fonts.js"></script>
+<script src="src/series.js"></script>
+<script>document.write('<script src="episodes/' + ((new URLSearchParams(location.search).get('episode') || 'ep01-iaward').replace(/[^a-z0-9-]/gi, '')) + '.config.js"><\/script>');</script>
+<script src="src/engine.js"></script>
+<script src="src/player.js"></script>
+</body>
+</html>

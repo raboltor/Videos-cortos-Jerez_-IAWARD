@@ -1,0 +1,75 @@
+1
+00:00:00,200 --> 00:00:03,800
+Meet IAWARD: AI agents for procurement at ACCIONA.
+
+2
+00:00:04,300 --> 00:00:06,400
+It supports the whole procurement journey,
+
+3
+00:00:06,400 --> 00:00:08,600
+from purchase request to contract award,
+
+4
+00:00:08,600 --> 00:00:10,850
+and information transfer to the corporate ERP.
+
+5
+00:00:11,200 --> 00:00:13,200
+Procurement involves manual tasks,
+
+6
+00:00:13,200 --> 00:00:15,000
+supplier questions and repeated comparisons.
+
+7
+00:00:15,000 --> 00:00:16,850
+IAWARD helps streamline that work.
+
+8
+00:00:17,200 --> 00:00:19,400
+Specialised AI agents prepare requests,
+
+9
+00:00:19,400 --> 00:00:21,400
+compare offers and support negotiation.
+
+10
+00:00:21,400 --> 00:00:23,400
+The buyer supervises throughout,
+
+11
+00:00:23,400 --> 00:00:25,600
+and explicitly approves every supplier selection,
+
+12
+00:00:25,600 --> 00:00:27,600
+negotiation and award decision.
+
+13
+00:00:27,600 --> 00:00:29,850
+AI proposes. Buyers approve.
+
+14
+00:00:30,200 --> 00:00:32,600
+The result: the workflow connects operational tasks,
+
+15
+00:00:32,600 --> 00:00:34,700
+while audit records keep proposals
+
+16
+00:00:34,700 --> 00:00:36,850
+and decisions traceable.
+
+17
+00:00:37,200 --> 00:00:38,700
+Next, planned phases:
+
+18
+00:00:38,700 --> 00:00:40,500
+refinement using historical purchasing data,
+
+19
+00:00:40,500 --> 00:00:42,850
+and adaptation to more countries and local regulations.
