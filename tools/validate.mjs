@@ -149,7 +149,12 @@ for (const s of cps) {
   const c = s.checkpoint;
   if (!(s.start < c.pauseAt && c.pauseAt < c.approveAt && c.approveAt < s.end)) gate.push(`${c.decision}: timing`);
   if (c.approveAt - c.pauseAt < 0.8) gate.push(`${c.decision}: pause too short to read`);
-  const before = await page.evaluate((tt) => { const E = window.__episode.engine; E.audit = []; window.__episode.renderAt(tt); const r = E.audit.map((b) => b.text); E.audit = null; return r; }, c.approveAt - 0.05);
+  const texts = (tt) => page.evaluate((tt) => { const E = window.__episode.engine; E.audit = []; window.__episode.renderAt(tt); const r = E.audit.map((b) => b.text); E.audit = null; return r; }, tt);
+  // every sampled frame of the checkpoint before the buyer acts must show no approval
+  for (let tt = c.pauseAt - 0.3; tt < c.approveAt; tt += 1 / 30) {
+    if ((await texts(tt)).some((x) => /^Approved/.test(x))) { gate.push(`${c.decision}: "Approved" visible at ${tt.toFixed(2)}s`); break; }
+  }
+  const before = await texts(c.approveAt - 0.05);
   const after = await page.evaluate((tt) => { const E = window.__episode.engine; E.audit = []; window.__episode.renderAt(tt); const r = E.audit.map((b) => b.text); E.audit = null; return r; }, c.approveAt + 0.5);
   if (before.some((x) => /^Approved/.test(x))) gate.push(`${c.decision}: "Approved" visible before the buyer acts`);
   if (!before.includes('Approve') || !before.includes('Awaiting buyer')) gate.push(`${c.decision}: no visible Approve action / waiting state`);

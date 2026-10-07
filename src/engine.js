@@ -1224,7 +1224,8 @@
     }
     const ka = easeOut(prog(t, cp.pauseAt - 0.15, cp.pauseAt + 0.15));
     E.text(cp.decision, 270, y + 82, { size: 46, weight: 800, alpha: a * ka });
-    if (waiting) {
+    if (!approved) {
+      // waiting for the buyer (includes the short lead-in before the action pauses)
       ctx.save();
       ctx.globalAlpha *= a * ka * (0.5 + 0.5 * Math.sin(t * 8));
       ctx.fillStyle = P.cyan;
@@ -1233,7 +1234,10 @@
       E.text(v.waitingLabel, 306, y + 146, { size: 42, weight: 600, color: P.text2, alpha: a * ka });
     } else {
       const k = easeOut(prog(t, cp.approveAt + 0.12, cp.approveAt + 0.35));
+      ctx.save();
+      ctx.globalAlpha *= a * k;
       E.check(290, y + 132, 34, P.red, 7);
+      ctx.restore();
       E.text(v.approvedLabel + ' by buyer', 324, y + 146, { size: 42, weight: 800, color: P.red, alpha: a * k });
     }
     // Approve button - pressed by the buyer, then confirmed
